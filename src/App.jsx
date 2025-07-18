@@ -981,8 +981,21 @@ export default function App() {
             </main>
           </div>
         </div>
-        <footer style={{height: '80px', background: 'var(--color-primary)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-          <span className="caption">© 2024. All rights reserved.</span>
+        <footer style={{
+          height: '80px',
+          background: 'linear-gradient(90deg, #181828 60%, #23233a 100%)',
+          color: '#C6FF00',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 -2px 24px 0 #00BFFF33',
+        }}>
+          <span className="caption" style={{
+            color: '#C6FF00',
+            textShadow: '0 2px 8px #181828, 0 1px 0 #fff',
+            fontWeight: 600,
+            fontSize: 16,
+          }}>© 2024. All rights reserved.</span>
         </footer>
       </div>
     </Router>

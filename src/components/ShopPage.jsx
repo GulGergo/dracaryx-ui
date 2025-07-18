@@ -131,6 +131,7 @@ export default function ShopPage() {
   const totalPrice = getProductPrice() + getWarrantyPrice() + getShippingPrice();
 
   const isMobile = window.innerWidth <= 600;
+  const isTablet = window.innerWidth > 600 && window.innerWidth <= 900;
 
   return (
     <div style={{
@@ -142,23 +143,26 @@ export default function ShopPage() {
       background: 'none',
       position: 'relative',
     }}>
-      {/* Mobilon a Categories blokk a fő tartalom előtt, desktopon oldalsáv */}
-      {(!detailsOpen && !checkoutOpen && isMobile) && (
+      {/* Categories blokk desktopon bal oldalon, mobilon felül */}
+      {(!detailsOpen && !checkoutOpen && (!isMobile && (isTablet || !isTablet))) && (
         <div
           className="shop-categories-block"
           style={{
-            position: 'static',
-            width: '100%',
-            left: 0,
-            top: 0,
+            position: 'fixed',
+            left: 32,
+            top: '66%',
+            transform: 'translateY(-50%)',
             zIndex: 10,
+            width: isTablet ? 140 : 220,
             background: 'none',
-            marginBottom: 16,
-            padding: '0 0 0 2px',
-            textAlign: 'left',
+            marginLeft: isTablet ? 24 : 80,
+            marginRight: isTablet ? 12 : 32,
+            minHeight: '100vh',
+            height: '100vh',
+            alignSelf: 'flex-start',
           }}
         >
-          <h2 style={{ fontSize: 24, marginBottom: 24, textAlign: 'left' }}>Categories</h2>
+          <h2 style={{ fontSize: 24, marginBottom: 24, textAlign: 'center' }}>Categories</h2>
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, marginBottom: 32 }}>
             {categories.map(cat => (
               <li key={cat.key} style={{ margin: 0 }}>
@@ -204,20 +208,24 @@ export default function ShopPage() {
           </div>
         </div>
       )}
-      {/* Desktopon oldalsávként */}
-      {(!detailsOpen && !checkoutOpen && !isMobile) && (
+      {/* Mobilon a Categories blokk a fő tartalom előtt */}
+      {(!detailsOpen && !checkoutOpen && isMobile) && (
         <div
           className="shop-categories-block"
           style={{
-            position: 'absolute',
-            left: -600,
-            top: 150,
+            position: 'static',
+            width: '100%',
+            left: 0,
+            top: 0,
             zIndex: 10,
-            width: 220,
             background: 'none',
+            marginBottom: 16,
+            margin: '0 auto',
+            padding: 0,
+            textAlign: 'center',
           }}
         >
-          <h2 style={{ fontSize: 24, marginBottom: 24, textAlign: 'center' }}>Categories</h2>
+          <h2 style={{ fontSize: 24, marginBottom: 24, textAlign: 'left' }}>Categories</h2>
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, marginBottom: 32 }}>
             {categories.map(cat => (
               <li key={cat.key} style={{ margin: 0 }}>
@@ -267,21 +275,16 @@ export default function ShopPage() {
       <div
         ref={listRef}
         style={{
-          position: detailsOpen || checkoutOpen ? 'absolute' : 'relative',
-          left: 0,
-          top: 0,
+          flex: 1,
+          minWidth: 0,
           width: '100%',
-          opacity: animating && detailsOpen ? 0 : !detailsOpen && !checkoutOpen ? 1 : 0,
-          transform: animating && detailsOpen ? 'translateX(-160px)' : 'translateX(0)',
-          pointerEvents: detailsOpen || checkoutOpen ? 'none' : 'auto',
-          transition: animating ? 'opacity 0.7s cubic-bezier(.77,0,.18,1), transform 0.7s cubic-bezier(.77,0,.18,1)' : 'none',
-          zIndex: detailsOpen || checkoutOpen ? 1 : 2,
-          maxWidth: isMobile ? '100%' : undefined,
-          margin: isMobile ? '0 auto' : undefined,
+          overflow: 'hidden',
+          marginLeft: !isMobile && !isTablet ? 220 : 0,
+          marginTop: isTablet ? 300 : 0,
         }}
       >
-        <div className="shop-products-block" style={{ marginTop: isMobile ? 16 : 130 }}>
-          <div className={styles.grid} style={{ justifyContent: 'flex-start' }}>
+        <div className="shop-products-block" style={{ marginTop: isMobile ? 16 : 130, width: '100%' }}>
+          <div className={styles.grid} style={{ width: '100%' }}>
             {filteredProducts.map(product => (
               <ProductCard key={product.name} {...product} onClick={() => handleCardClick(product)} />
             ))}
@@ -324,13 +327,13 @@ export default function ShopPage() {
                 {/* Bal oldal: kép */}
                 <div style={{
                   minWidth: 0,
-                  maxWidth: isMobile ? '90vw' : 900,
+                  maxWidth: isMobile ? '90vw' : isTablet ? 'calc(100vw - 48px)' : 900,
                   flex: isMobile ? 'unset' : '1 1 320px',
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  marginLeft: isMobile ? 0 : `-100px`,
-                  marginRight: isMobile ? 0 : `200px`,
+                  marginLeft: isTablet ? 24 : isMobile ? 0 : `-100px`,
+                  marginRight: isTablet ? 24 : isMobile ? 0 : `200px`,
                 }}>
                   <img
                     src={selectedProduct.image}

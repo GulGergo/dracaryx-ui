@@ -1,27 +1,25 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 32px;
-  padding: 32px 0;
+  width: 100%;
+  padding: 32px 16px;
+  box-sizing: border-box;
   /* background: var(--color-bg); */
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 900px) {
   .grid {
-    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 16px 8px;
   }
 }
 
-@media (max-width: 800px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .grid {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 8px;
+    padding: 8px 4px;
   }
 }
 
@@ -88,4 +86,9 @@
     padding: 14px 0 !important;
     border-radius: 10px !important;
   }
+}
+
+.card {
+  max-width: 100%;
+  margin: 0 auto;
 } 

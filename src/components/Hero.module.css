@@ -37,7 +37,7 @@
 
 .cta:hover {
   box-shadow: 0 8px 32px 0 rgba(0,191,255,0.24);
-}
+} 
 
 @media (max-width: 600px) {
   .hero {

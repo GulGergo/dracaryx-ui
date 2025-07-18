@@ -1,0 +1,175 @@
+@import "@fontsource/poppins/400.css";
+@import "@fontsource/poppins/700.css";
+
+:root {
+  --color-primary: #2E1A47;
+  --color-primary-alt: #1F1F1F;
+  --color-accent-1: #00BFFF;
+  --color-accent-2: #C6FF00;
+  --color-accent-3: #00FFFF;
+  --color-bg: #FFFFFF;
+  --color-divider: #E0E0E0;
+
+  --font-primary: 'Poppins', Arial, sans-serif;
+
+  --h1-size: 48px;
+  --h2-size: 36px;
+  --body-size: 16px;
+  --caption-size: 12px;
+  --button-size: 16px;
+
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  font-family: var(--font-primary);
+  background: var(--color-bg);
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: var(--h1-size);
+  font-weight: 700;
+  margin: 0 0 24px 0;
+  color: #fff;
+}
+
+h2 {
+  font-size: var(--h2-size);
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  color: #fff;
+}
+
+p {
+  font-size: var(--body-size);
+  font-weight: 400;
+  margin: 0 0 12px 0;
+  color: #fff;
+}
+
+.caption {
+  font-size: var(--caption-size);
+  font-weight: 300;
+  color: #fff;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.vanilla:hover {
+  filter: drop-shadow(0 0 2em #f7df1eaa);
+}
+
+.logo img {
+  height: 100px;
+  width: auto;
+  margin-right: 0;
+  vertical-align: middle;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+button {
+  font-size: var(--button-size);
+  font-family: var(--font-primary);
+  font-weight: 500;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 32px;
+  background: linear-gradient(90deg, var(--color-accent-1), var(--color-accent-2), var(--color-accent-3));
+  color: var(--color-primary-alt);
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+
+button:hover {
+  box-shadow: 0 4px 24px 0 rgba(0,191,255,0.2);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--color-divider);
+  margin: 32px 0;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+.link {
+  color: #fff;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, .link, .caption, .navbar a {
+  color: #F3F6FB !important;
+  text-shadow: 0 2px 8px rgba(30,40,80,0.7) !important;
+}
+
+h1, h2 {
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.link, .navbar a {
+  color: #F3F6FB !important;
+  text-shadow: 0 2px 8px rgba(30,40,80,0.7) !important;
+  transition: color 0.2s;
+}
+.link:hover, .navbar a:hover {
+  color: #00BFFF !important;
+}

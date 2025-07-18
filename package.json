@@ -1,0 +1,20 @@
+{
+  "name": "vaultify-react-ui",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+  },
+  "dependencies": {
+    "@fontsource/poppins": "^5.2.6",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.3",
+    "vite": "^7.0.5"
+  }
+}

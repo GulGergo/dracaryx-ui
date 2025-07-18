@@ -1,0 +1,136 @@
+.tierSelector {
+  position: fixed;
+  top: 50%;
+  left: 60px;
+  transform: translateY(-50%);
+  z-index: 20;
+  width: 340px;
+  max-width: 95vw;
+  padding: 32px 24px 24px 24px;
+  border-radius: 18px;
+  box-shadow: 2px 0 24px 0 rgba(0,0,0,0.10);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: none;
+  border: 2px solid #00BFFF33;
+}
+
+.header {
+  font-weight: 700;
+  font-size: 22px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #F3F6FB;
+  letter-spacing: 0.5px;
+}
+
+.toggleRow {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+.toggleRow button {
+  flex: 1 1 0;
+  padding: 10px 0;
+  border-radius: 8px;
+  border: 2px solid #333;
+  background: rgba(255,255,255,0.04);
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: none;
+  transition: all 0.2s;
+  outline: none;
+  min-width: 0;
+  letter-spacing: 0.2px;
+}
+
+.toggleRow button.active,
+.toggleRow button:focus,
+.toggleRow button:hover {
+  border: 2px solid #00BFFF;
+  background: linear-gradient(90deg, #00BFFF 60%, #C6FF00 100%);
+  color: #222;
+  box-shadow: 0 2px 12px 0 #00BFFF33;
+}
+
+.tierContent {
+  margin-top: 8px;
+  margin-bottom: 0;
+  color: #F3F6FB;
+  font-size: 15px;
+  min-height: 170px;
+  width: 100%;
+  text-align: left;
+}
+
+.tierTitle {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 6px;
+  color: #C6FF00;
+}
+
+.tierSubtitle {
+  margin-bottom: 10px;
+  color: #F3F6FB;
+  font-size: 15px;
+}
+
+.tierList {
+  margin: 0;
+  padding-left: 22px;
+  text-align: left;
+  color: #F3F6FB;
+  font-size: 15px;
+}
+
+@media (max-width: 600px) {
+  .tierSelector {
+    position: static;
+    width: 100%;
+    max-width: 100vw;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 18px 8px 12px 8px;
+    border: none;
+    border-bottom: 2px solid #00BFFF33;
+    top: unset;
+    left: unset;
+    transform: none;
+  }
+  .header {
+    font-size: 18px;
+  }
+  .toggleRow {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+  .toggleRow button {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px 0;
+    border-radius: 10px;
+  }
+  .tierContent {
+    font-size: 14px;
+    min-height: 120px;
+  }
+  .tierTitle {
+    font-size: 1.1rem;
+  }
+  .tierSubtitle {
+    font-size: 1rem;
+  }
+  .tierList {
+    font-size: 0.95rem;
+    padding-left: 18px;
+  }
+} 

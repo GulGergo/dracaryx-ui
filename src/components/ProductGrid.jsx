@@ -218,7 +218,7 @@ function PhoneCarousel({ products, onCardClick }) {
       setPrevIndex(index);
       setDirection(1);
       setIndex((prev) => (prev + 1) % products.length);
-    }, 5000);
+    }, 15000); // 15 másodperc
     return () => clearTimeout(timer);
   }, [index, products.length]);
 
@@ -250,7 +250,12 @@ function PhoneCarousel({ products, onCardClick }) {
                 height: '100%',
               }}
             >
-              <ProductCard {...product} onClick={() => onCardClick(product)} />
+              <ProductCard {...product} onClick={() => {
+                setPrevIndex(index);
+                setDirection(i > index ? 1 : -1);
+                setIndex(i);
+                if (onCardClick) onCardClick(product);
+              }} />
             </div>
           );
         })}
@@ -297,7 +302,7 @@ function TabletCarousel({ products, onCardClick }) {
       setPrevIndex(index);
       setDirection(1);
       setIndex((prev) => (prev + 1) % products.length);
-    }, 5000);
+    }, 15000);
     return () => clearTimeout(timer);
   }, [index, products.length]);
 
@@ -328,7 +333,12 @@ function TabletCarousel({ products, onCardClick }) {
                 height: '100%',
               }}
             >
-              <ProductCard {...product} onClick={() => onCardClick(product)} />
+              <ProductCard {...product} onClick={() => {
+                setPrevIndex(index);
+                setDirection(i > index ? 1 : -1);
+                setIndex(i);
+                if (onCardClick) onCardClick(product);
+              }} />
             </div>
           );
         })}
@@ -374,7 +384,7 @@ function LaptopCarousel({ products, onCardClick }) {
       setPrevIndex(index);
       setDirection(1);
       setIndex((prev) => (prev + 1) % products.length);
-    }, 5000);
+    }, 15000);
     return () => clearTimeout(timer);
   }, [index, products.length]);
 
@@ -405,7 +415,12 @@ function LaptopCarousel({ products, onCardClick }) {
                 height: '100%',
               }}
             >
-              <ProductCard {...product} onClick={() => onCardClick(product)} />
+              <ProductCard {...product} onClick={() => {
+                setPrevIndex(index);
+                setDirection(i > index ? 1 : -1);
+                setIndex(i);
+                if (onCardClick) onCardClick(product);
+              }} />
             </div>
           );
         })}

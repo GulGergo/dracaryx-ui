@@ -240,7 +240,7 @@ function RepairPage() {
       >
         {selectedCategory && (
           <>
-            <button onClick={handleBack} style={{ position: 'absolute', left: 0, top: 0, background: 'none', color: '#00BFFF', border: 'none', fontSize: 18, fontWeight: 700, cursor: 'pointer', padding: 0, margin: 0, zIndex: 10 }}>&larr; Back</button>
+            <button onClick={handleBack} style={{ position: 'absolute', left: 0, top: -30, background: 'none', color: '#00BFFF', border: 'none', fontSize: 18, fontWeight: 700, cursor: 'pointer', padding: 0, margin: 0, zIndex: 10 }}>&larr; Back</button>
             <div style={{ fontWeight: 700, fontSize: 28, margin: '0 0 32px 0', textAlign: 'center' }}>
               Select your {products.find(p => p.key === selectedCategory)?.label}
             </div>
@@ -299,6 +299,8 @@ function RepairPage() {
             flexDirection: 'column',
             alignItems: 'center',
             gap: 24,
+            maxHeight: window.innerWidth <= 600 ? '90vh' : undefined,
+            overflowY: window.innerWidth <= 600 ? 'auto' : undefined,
           }} onClick={e => e.stopPropagation()}>
             <div style={{ fontWeight: 700, fontSize: 24, marginBottom: 8, textAlign: 'center' }}>
               {modalProduct.name}
@@ -377,8 +379,8 @@ function RepairPage() {
           <div style={{
             background: 'linear-gradient(135deg, #181828 80%, #23233a 100%)',
             borderRadius: 24,
-            padding: '40px 48px',
-            minWidth: 420,
+            padding: window.innerWidth <= 600 ? 16 : '40px 48px',
+            minWidth: 300,
             maxWidth: 480,
             color: 'white',
             boxShadow: '0 12px 48px 0 rgba(0,0,0,0.55)',
@@ -387,47 +389,84 @@ function RepairPage() {
             flexDirection: 'column',
             alignItems: 'center',
             gap: 18,
+            maxHeight: window.innerWidth <= 600 ? '98vh' : undefined,
+            overflowY: window.innerWidth <= 600 ? 'auto' : undefined,
           }} onClick={e => e.stopPropagation()}>
-            <div style={{ fontWeight: 700, fontSize: 22, marginBottom: 8, textAlign: 'center', display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ fontWeight: 700, fontSize: 22, marginBottom: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
               <span role="img" aria-label="upgrade">{upgradeIcon}</span> {upgradeTitle}
             </div>
-            <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 8 }}>
-              <thead>
-                <tr style={{ color: '#fff', fontWeight: 700, fontSize: 16 }}>
-                  <th style={{ textAlign: 'left', padding: '6px 0' }}>Upgrade Type</th>
-                  <th style={{ textAlign: 'left', padding: '6px 0' }}>Price (From)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {upgrades.map(upg => (
-                  <tr key={upg.key} style={{ borderTop: '1px solid #333' }}>
-                    <td style={{ padding: '8px 0', color: '#fff', fontSize: 16 }}>
-                      <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontWeight: 500 }}>
-                        <input
-                          type="checkbox"
-                          checked={!!upgradeSelections[upg.key]}
-                          onChange={e => setUpgradeSelections(s => ({ ...s, [upg.key]: e.target.checked }))}
-                          style={{ marginRight: 6 }}
-                        />
-                        <span>{upg.icon}</span> {upg.label}
-                      </label>
-                    </td>
-                    <td style={{ padding: '8px 0', color: '#C6FF00', fontWeight: 700, fontSize: 16 }}>
-                      +${upg.price.toFixed(2)}
-                    </td>
+            {window.innerWidth <= 600 ? (
+              <div style={{ maxWidth: '100vw', overflowX: 'auto', padding: '0 4px' }}>
+                <table style={{ minWidth: 380, width: '100%', borderCollapse: 'collapse', marginBottom: 8 }}>
+                  <thead>
+                    <tr style={{ color: '#fff', fontWeight: 700, fontSize: 16 }}>
+                      <th style={{ textAlign: 'left', padding: '6px 0', wordBreak: 'break-word', whiteSpace: 'normal' }}>Upgrade Type</th>
+                      <th style={{ textAlign: 'left', padding: '6px 0', wordBreak: 'break-word', whiteSpace: 'normal' }}>Price (From)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {upgrades.map(upg => (
+                      <tr key={upg.key} style={{ borderTop: '1px solid #333' }}>
+                        <td style={{ padding: '8px 0', color: '#fff', fontSize: 16, wordBreak: 'break-word', whiteSpace: 'normal' }}>
+                          <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                            <input
+                              type="checkbox"
+                              checked={!!upgradeSelections[upg.key]}
+                              onChange={e => setUpgradeSelections(s => ({ ...s, [upg.key]: e.target.checked }))}
+                              style={{ marginRight: 6, verticalAlign: 'middle', height: 20, width: 20, margin: 0 }}
+                            />
+                            <span>{upg.icon}</span> {upg.label}
+                          </label>
+                        </td>
+                        <td style={{ padding: '8px 0', color: '#C6FF00', fontWeight: 700, fontSize: 16, wordBreak: 'break-word', whiteSpace: 'normal' }}>
+                          <span style={{ whiteSpace: 'nowrap' }}>+${upg.price.toFixed(2)}</span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 8 }}>
+                <thead>
+                  <tr style={{ color: '#fff', fontWeight: 700, fontSize: 16 }}>
+                    <th style={{ textAlign: 'left', padding: '6px 0' }}>Upgrade Type</th>
+                    <th style={{ textAlign: 'left', padding: '6px 0' }}>Price (From)</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-            <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 600, margin: '8px 0 0 0', color: '#fff' }}>
-              <input
-                type="checkbox"
-                checked={upgradeRepair}
-                onChange={e => setUpgradeRepair(e.target.checked)}
-                style={{ marginRight: 6 }}
-              />
-              Include Repair
-            </label>
+                </thead>
+                <tbody>
+                  {upgrades.map(upg => (
+                    <tr key={upg.key} style={{ borderTop: '1px solid #333' }}>
+                      <td style={{ padding: '8px 0', color: '#fff', fontSize: 16 }}>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                          <input
+                            type="checkbox"
+                            checked={!!upgradeSelections[upg.key]}
+                            onChange={e => setUpgradeSelections(s => ({ ...s, [upg.key]: e.target.checked }))}
+                            style={{ marginRight: 6, verticalAlign: 'middle', height: 20, width: 20, margin: 0 }}
+                          />
+                          <span>{upg.icon}</span> {upg.label}
+                        </label>
+                      </td>
+                      <td style={{ padding: '8px 0', color: '#C6FF00', fontWeight: 700, fontSize: 16 }}>
+                        <span style={{ whiteSpace: 'nowrap' }}>+${upg.price.toFixed(2)}</span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+            <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-start', margin: '8px 0 0 0' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 600, color: '#fff', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                <input
+                  type="checkbox"
+                  checked={upgradeRepair}
+                  onChange={e => setUpgradeRepair(e.target.checked)}
+                  style={{ marginRight: 6, verticalAlign: 'middle', height: 20, width: 20, margin: 0 }}
+                />
+                Include Repair
+              </label>
+            </div>
             {/* Warranty Extension Section */}
             <div style={{ width: '100%', margin: '18px 0 0 0' }}>
               <div style={{ fontWeight: 700, fontSize: 20, marginBottom: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
@@ -443,29 +482,31 @@ function RepairPage() {
                 </thead>
                 <tbody>
                   <tr style={{ borderTop: '1px solid #333' }}>
-                    <td colSpan={3} style={{ padding: '8px 0', color: '#fff', fontSize: 15 }}>
-                      <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontWeight: 500 }}>
+                    <td style={{ padding: '8px 0', color: '#fff', fontSize: 15 }}>
+                      <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', verticalAlign: 'middle' }}>
                         <input
                           type="radio"
-                          name="warranty"
+                          name="warranty-repair"
                           checked={selectedWarranty === null}
                           onChange={() => setSelectedWarranty(null)}
-                          style={{ marginRight: 6 }}
+                          style={{ marginRight: 6, verticalAlign: 'middle', height: 18, width: 18, margin: 0 }}
                         />
                         No warranty extension
                       </label>
                     </td>
+                    <td></td>
+                    <td></td>
                   </tr>
                   {warrantyPlans.map(plan => (
                     <tr key={plan.key} style={{ borderTop: '1px solid #333' }}>
                       <td style={{ padding: '8px 0', color: '#fff', fontSize: 15 }}>
-                        <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontWeight: 500 }}>
+                        <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', verticalAlign: 'middle' }}>
                           <input
                             type="radio"
-                            name="warranty"
+                            name="warranty-repair"
                             checked={selectedWarranty === plan.key}
                             onChange={() => setSelectedWarranty(plan.key)}
-                            style={{ marginRight: 6 }}
+                            style={{ marginRight: 6, verticalAlign: 'middle', height: 18, width: 18, margin: 0 }}
                           />
                           {plan.label}
                         </label>
@@ -549,6 +590,8 @@ function RepairPage() {
             flexDirection: 'column',
             alignItems: 'center',
             gap: 18,
+            maxHeight: window.innerWidth <= 600 ? '90vh' : undefined,
+            overflowY: window.innerWidth <= 600 ? 'auto' : undefined,
           }} onClick={e => e.stopPropagation()}>
             <div style={{ fontWeight: 700, fontSize: 22, marginBottom: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
               <span role="img" aria-label="truck">🚚</span> Shipping Options
@@ -585,8 +628,10 @@ function RepairPage() {
                         <span>{opt.icon}</span> {opt.label}
                       </label>
                     </td>
-                    <td style={{ padding: '8px 0', color: opt.price === 0 ? '#C6FF00' : '#fff', fontWeight: 700, fontSize: 15 }}>{opt.priceLabel}</td>
-                    <td style={{ padding: '8px 0', color: '#fff', fontSize: 15 }}>{opt.speed}</td>
+                    <td style={{ padding: '8px 0', color: opt.price === 0 ? '#C6FF00' : '#fff', fontWeight: 700, fontSize: 15, textAlign: 'right', paddingRight: 18 }}>
+                      <span style={{ whiteSpace: 'nowrap' }}>{opt.priceLabel}</span>
+                    </td>
+                    <td style={{ padding: '8px 0', color: '#fff', fontSize: 15, textAlign: 'left' }}>{opt.speed}</td>
                   </tr>
                 ))}
               </tbody>
@@ -594,8 +639,9 @@ function RepairPage() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#C6FF00', fontSize: 15, marginTop: 8 }}>
               <span role="img" aria-label="check">✅</span> Tracking included on both methods
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#fff', fontSize: 15, marginTop: 2, fontStyle: 'italic' }}>
-              <span role="img" aria-label="tools">🛠️</span> Self-shipping requires customer to drop off at a partner location
+            <div style={{ width: '100%', boxSizing: 'border-box', display: 'flex', alignItems: 'center', gap: 8, color: '#fff', fontSize: 15, marginTop: 2, fontStyle: 'italic', padding: '0 70px', overflowX: 'auto' }}>
+              <span role="img" aria-label="tools">🛠️</span>
+              <span style={{ display: 'inline-block', minWidth: 320, wordBreak: 'break-word', whiteSpace: 'normal' }}>Self-shipping requires customer to drop off at a partner location</span>
             </div>
             <button
               style={{
@@ -659,11 +705,13 @@ function RepairPage() {
             flexDirection: 'column',
             alignItems: 'center',
             gap: 18,
+            maxHeight: window.innerWidth <= 600 ? '90vh' : undefined,
+            overflowY: window.innerWidth <= 600 ? 'auto' : undefined,
           }} onClick={e => e.stopPropagation()}>
             <div style={{ fontWeight: 700, fontSize: 22, marginBottom: 8, textAlign: 'center' }}>
               Contact & Shipping Info
             </div>
-            <form style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 14 }} onSubmit={e => { e.preventDefault(); /* handle submit */ }}>
+            <form style={{ width: '95%', display: 'flex', flexDirection: 'column', gap: 14, padding: '0 18px' }} onSubmit={e => { e.preventDefault(); /* handle submit */ }}>
               <input type="text" required placeholder="Full Name" value={userInfo.name} onChange={e => setUserInfo({ ...userInfo, name: e.target.value })} style={{ padding: 12, borderRadius: 8, border: '1px solid #ccc', fontSize: 16 }} />
               <input type="tel" required placeholder="Phone Number" value={userInfo.phone} onChange={e => setUserInfo({ ...userInfo, phone: e.target.value })} style={{ padding: 12, borderRadius: 8, border: '1px solid #ccc', fontSize: 16 }} />
               <input type="email" required placeholder="Email Address" value={userInfo.email} onChange={e => setUserInfo({ ...userInfo, email: e.target.value })} style={{ padding: 12, borderRadius: 8, border: '1px solid #ccc', fontSize: 16 }} />
@@ -728,6 +776,8 @@ function RepairPage() {
             flexDirection: 'column',
             alignItems: 'center',
             gap: 18,
+            maxHeight: window.innerWidth <= 600 ? '90vh' : undefined,
+            overflowY: window.innerWidth <= 600 ? 'auto' : undefined,
           }} onClick={e => e.stopPropagation()}>
             <div style={{ fontWeight: 700, fontSize: 22, marginBottom: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
               <span role="img" aria-label="shield">🛡️</span> Warranty Extension
@@ -742,29 +792,31 @@ function RepairPage() {
               </thead>
               <tbody>
                 <tr style={{ borderTop: '1px solid #333' }}>
-                  <td colSpan={3} style={{ padding: '8px 0', color: '#fff', fontSize: 15 }}>
-                    <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontWeight: 500 }}>
+                  <td style={{ padding: '8px 0', color: '#fff', fontSize: 15 }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', verticalAlign: 'middle' }}>
                       <input
                         type="radio"
                         name="warranty-repair"
                         checked={selectedWarranty === null}
                         onChange={() => setSelectedWarranty(null)}
-                        style={{ marginRight: 6 }}
+                        style={{ marginRight: 6, verticalAlign: 'middle', height: 18, width: 18, margin: 0 }}
                       />
                       No warranty extension
                     </label>
                   </td>
+                  <td></td>
+                  <td></td>
                 </tr>
                 {warrantyPlans.map(plan => (
                   <tr key={plan.key} style={{ borderTop: '1px solid #333' }}>
                     <td style={{ padding: '8px 0', color: '#fff', fontSize: 15 }}>
-                      <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontWeight: 500 }}>
+                      <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', verticalAlign: 'middle' }}>
                         <input
                           type="radio"
                           name="warranty-repair"
                           checked={selectedWarranty === plan.key}
                           onChange={() => setSelectedWarranty(plan.key)}
-                          style={{ marginRight: 6 }}
+                          style={{ marginRight: 6, verticalAlign: 'middle', height: 18, width: 18, margin: 0 }}
                         />
                         {plan.label}
                       </label>
@@ -968,7 +1020,45 @@ export default function App() {
                         </p>
                       </div>
                     </div>
-                    <TierSelector />
+                    {/* How it Works + TierSelector egymás mellett */}
+                    <div style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      gap: 32,
+                      justifyContent: 'center',
+                      alignItems: 'flex-start',
+                      maxWidth: 1000,
+                      margin: '48px auto 0 auto',
+                      width: '100%',
+                      boxSizing: 'border-box',
+                      flexWrap: 'wrap',
+                    }}>
+                      <TierSelector />
+                      <div style={{
+                        flex: 1,
+                        minWidth: 260,
+                        maxWidth: 420,
+                        marginBottom: 28,
+                        background: 'none',
+                        color: '#fff',
+                        textAlign: 'left',
+                        borderRadius: 12,
+                        padding: 0,
+                        marginLeft: 0,
+                        alignSelf: 'flex-start',
+                      }}>
+                        <div style={{ display: 'flex', alignItems: 'center', fontWeight: 700, fontSize: 22, marginBottom: 10, gap: 8 }}>
+                          <span role="img" aria-label="info">🖼️</span> How It Works:
+                        </div>
+                        <ol style={{ margin: 0, paddingLeft: 32, fontSize: 17, color: '#fff', fontWeight: 500 }}>
+                          <li style={{ marginBottom: 6 }}><b>Select your device model</b></li>
+                          <li style={{ marginBottom: 6 }}><b>Upload your design or image</b></li>
+                          <li style={{ marginBottom: 6 }}><b>Adjust position, scale, and rotation directly on the case</b></li>
+                          <li style={{ marginBottom: 6 }}><b>Preview your final result</b></li>
+                          <li style={{ marginBottom: 0 }}><b>Add to cart & we take care of the rest</b></li>
+                        </ol>
+                      </div>
+                    </div>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', width: '100%' }}>
                       <UploadForm />
                     </div>

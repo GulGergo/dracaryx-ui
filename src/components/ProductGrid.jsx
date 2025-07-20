@@ -8,6 +8,7 @@ import dracaryxUmbra from '../assets/dracaryx-umbra.png';
 import dracaryxNoxveil from '../assets/dracaryx-noxveil.png';
 import dracaryxSolstrix from '../assets/dracaryx-solstrix.png';
 import dracaryxAetherion from '../assets/dracaryx-aetherion.png';
+import dracaryxPyros from '../assets/dracaryx-pyros.png';
 
 const phoneProducts = [
   {
@@ -158,10 +159,35 @@ const laptopProducts = [
       ],
     },
   },
+  {
+    name: 'Dracaryx Pyros',
+    price: '$3,699',
+    image: dracaryxPyros,
+    details: {
+      subtitle: '🔴 🐉 Forged in Fire. Designed to Dominate.',
+      limited: 'Limited Edition',
+      description: 'The Dracaryx Pyros is a high-tech war machine wrapped in molten orange and accented with mystical turquoise hues. Built for creators, power users, and next-gen gamers, its glowing crimson dragon sigil on the back is more than design—it\'s a statement.',
+      specs: [
+        { label: 'Display', value: '16.5" 4K AMOLED, 240Hz, HDR10+' },
+        { label: 'Processor', value: 'DracoFire i12X Hybrid Core' },
+        { label: 'GPU', value: 'Dracaryx VX9800M (20GB GDDR7)' },
+        { label: 'RAM', value: '64GB LPDDR6X' },
+        { label: 'Storage', value: '2TB NVMe Gen5 SSD + Expansion Slot' },
+        { label: 'Cooling', value: 'Dual CryoCore LiquidTech with AI thermal mapping' },
+        { label: 'Keyboard', value: 'RGB mechanical (orange-turquoise), magnetic switch' },
+        { label: 'Audio', value: '8x FlameForce Surround Speakers' },
+        { label: 'Battery', value: '99Wh, 150W fast charge' },
+        { label: 'Ports', value: '3x USB4, 2x Thunderbolt 5, 1x HDMI 2.2, microSD, 3.5mm jack' },
+        { label: 'OS', value: 'DracOS Ultra 6.2 (Linux-based)' },
+        { label: 'Extras', value: 'Backlit dragon emblem, DragonConnect cloud sync, biometric dragon-scale touchpad' },
+      ],
+    },
+  },
 ];
 
 function ProductModal({ product, onClose }) {
   if (!product) return null;
+  const isMobile = window.innerWidth <= 600;
   return (
     <div style={{
       position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000
@@ -169,18 +195,22 @@ function ProductModal({ product, onClose }) {
       <div style={{
         background: 'linear-gradient(135deg, #181828 80%, #23233a 100%)',
         borderRadius: 24,
-        padding: '40px 48px',
-        minWidth: 350,
-        maxWidth: 800,
+        padding: isMobile ? '18px 8px' : '40px 48px',
+        minWidth: isMobile ? 'unset' : 350,
+        maxWidth: isMobile ? '98vw' : 800,
+        width: isMobile ? '98vw' : 'auto',
+        maxHeight: isMobile ? '98vh' : 'none',
         color: 'white',
         display: 'flex',
-        gap: 40,
+        flexDirection: isMobile ? 'column' : 'row',
+        gap: isMobile ? 18 : 40,
         boxShadow: '0 12px 48px 0 rgba(0,0,0,0.55)',
         position: 'relative',
-        alignItems: 'flex-start',
+        alignItems: isMobile ? 'center' : 'flex-start',
+        overflowY: isMobile ? 'auto' : 'unset',
       }} onClick={e => e.stopPropagation()}>
         <img src={product.image} alt={product.name} style={{
-          width: 260,
+          width: isMobile ? 180 : 260,
           height: 'auto',
           borderRadius: 16,
           objectFit: 'contain',
@@ -190,19 +220,40 @@ function ProductModal({ product, onClose }) {
           margin: 0,
           display: 'block',
         }} />
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <h2 style={{ margin: 0, fontSize: 32, fontWeight: 700, letterSpacing: 1 }}>{product.name}</h2>
-          {product.details?.subtitle && <div style={{ fontStyle: 'italic', color: '#ffb347', marginBottom: 12, fontSize: 18 }}>{product.details.subtitle}</div>}
-          {product.details?.description && <div style={{ marginBottom: 20, fontSize: 16, lineHeight: 1.6 }}>{product.details.description}</div>}
+        <div style={{ flex: 1, minWidth: 0, width: isMobile ? '100%' : 'auto' }}>
+          <h2 style={{ margin: 0, fontSize: isMobile ? 22 : 32, fontWeight: 700, letterSpacing: 1 }}>{product.name}</h2>
+          {product.details?.subtitle && <div style={{ fontStyle: 'italic', color: '#ffb347', marginBottom: 12, fontSize: isMobile ? 15 : 18 }}>{product.details.subtitle}</div>}
+          {product.details?.limited && (
+            <div style={{
+              display: 'inline-block',
+              background: 'linear-gradient(90deg, #181828 70%, #23233a 100%)',
+              color: '#F3F6FB',
+              fontWeight: 800,
+              fontSize: isMobile ? 13 : 16,
+              borderRadius: 14,
+              padding: isMobile ? '4px 12px' : '5px 22px',
+              marginBottom: 14,
+              marginLeft: 0,
+              marginTop: 0,
+              letterSpacing: 2,
+              boxShadow: '0 2px 16px 0 #00BFFF33',
+              border: '2px solid #00BFFF',
+              textShadow: '0 1px 8px #00BFFF44',
+              textTransform: 'uppercase',
+              width: 'fit-content',
+              letterSpacing: '0.15em',
+            }}>{product.details.limited}</div>
+          )}
+          {product.details?.description && <div style={{ marginBottom: isMobile ? 12 : 20, fontSize: isMobile ? 14 : 16, lineHeight: 1.6 }}>{product.details.description}</div>}
           {product.details?.specs && (
-            <ul style={{ paddingLeft: 18, margin: 0, fontSize: 15, lineHeight: 1.7 }}>
+            <ul style={{ paddingLeft: 18, margin: 0, fontSize: isMobile ? 13 : 15, lineHeight: 1.7 }}>
               {product.details.specs.map((spec, i) => (
                 <li key={i}><b>{spec.label}:</b> {spec.value}</li>
               ))}
             </ul>
           )}
         </div>
-        <button onClick={onClose} style={{ position: 'absolute', top: 24, right: 32, background: 'none', border: 'none', color: '#fff', fontSize: 32, cursor: 'pointer', fontWeight: 700, lineHeight: 1 }}>&times;</button>
+        <button onClick={onClose} style={{ position: 'absolute', top: isMobile ? 10 : 24, right: isMobile ? 16 : 32, background: 'none', border: 'none', color: '#fff', fontSize: isMobile ? 26 : 32, cursor: 'pointer', fontWeight: 700, lineHeight: 1 }}>&times;</button>
       </div>
     </div>
   );
@@ -456,14 +507,20 @@ function LaptopCarousel({ products, onCardClick }) {
   );
 }
 
-export default function ProductGrid() {
+export default function ProductGrid({ modalProduct: externalModalProduct, onClose: externalOnClose, onProductClick }) {
   const [modalProduct, setModalProduct] = useState(null);
   const handleCardClick = (product) => {
-    if (product.details) setModalProduct(product);
+    if (onProductClick) {
+      onProductClick(product);
+    } else if (product.details) {
+      setModalProduct(product);
+    }
   };
+  const showModal = externalModalProduct !== undefined ? externalModalProduct : modalProduct;
+  const handleClose = externalOnClose !== undefined ? externalOnClose : () => setModalProduct(null);
   return (
     <>
-      <ProductModal product={modalProduct} onClose={() => setModalProduct(null)} />
+      {showModal && <ProductModal product={showModal} onClose={handleClose} />}
       <div className={styles.productGridRow}>
         <div className={styles.productColumn}>
           <h2>Phones</h2>

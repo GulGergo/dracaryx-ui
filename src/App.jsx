@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import TierSelector from './components/TierSelector';
 import { phoneProducts, tabletProducts, laptopProducts } from './components/ProductGrid';
 import ProductCard from './components/ProductCard';
+import { ProductModal } from './components/ProductGrid';
 
 function RepairPage() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -274,93 +275,7 @@ function RepairPage() {
       </div>
       {/* Modal for repair/upgrade selection */}
       {modalOpen && modalProduct && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100vw',
-          height: '100vh',
-          background: 'rgba(0,0,0,0.7)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 1000,
-        }} onClick={() => { setModalOpen(false); setModalProduct(null); }}>
-          <div style={{
-            background: 'linear-gradient(135deg, #181828 80%, #23233a 100%)',
-            borderRadius: 24,
-            padding: '40px 48px',
-            minWidth: 320,
-            maxWidth: 400,
-            color: 'white',
-            boxShadow: '0 12px 48px 0 rgba(0,0,0,0.55)',
-            position: 'relative',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: 24,
-            maxHeight: window.innerWidth <= 600 ? '90vh' : undefined,
-            overflowY: window.innerWidth <= 600 ? 'auto' : undefined,
-          }} onClick={e => e.stopPropagation()}>
-            <div style={{ fontWeight: 700, fontSize: 24, marginBottom: 8, textAlign: 'center' }}>
-              {modalProduct.name}
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'row', gap: 18, marginBottom: 8 }}>
-              <button
-                style={{
-                  background: 'linear-gradient(90deg, #00BFFF 60%, #C6FF00 100%)',
-                  color: '#222',
-                  fontWeight: 700,
-                  fontSize: 18,
-                  border: 'none',
-                  borderRadius: 10,
-                  padding: '14px 32px',
-                  cursor: 'pointer',
-                  boxShadow: '0 2px 12px 0 #00BFFF33',
-                }}
-                onClick={() => { setModalOpen(false); setWarrantyModalOpen(true); }}
-              >
-                Repair
-              </button>
-              <button
-                style={{
-                  background: 'linear-gradient(90deg, #C6FF00 60%, #00BFFF 100%)',
-                  color: '#222',
-                  fontWeight: 700,
-                  fontSize: 18,
-                  border: 'none',
-                  borderRadius: 10,
-                  padding: '14px 32px',
-                  cursor: 'pointer',
-                  boxShadow: '0 2px 12px 0 #C6FF0033',
-                }}
-                onClick={() => {
-                  setModalOpen(false);
-                  setUpgradeModalOpen(true);
-                  setUpgradeSelections({});
-                  setUpgradeRepair(true);
-                }}
-              >
-                Upgrade
-              </button>
-            </div>
-            <button
-              style={{
-                background: 'none',
-                color: '#fff',
-                border: 'none',
-                fontSize: 16,
-                marginTop: 8,
-                cursor: 'pointer',
-                textDecoration: 'underline',
-                opacity: 0.7,
-              }}
-              onClick={() => { setModalOpen(false); setModalProduct(null); }}
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
+        <ProductModal product={modalProduct} onClose={() => setModalOpen(false)} />
       )}
       {/* Upgrade modal for phone */}
       {upgradeModalOpen && modalProduct && (
@@ -935,6 +850,9 @@ function ContactUs() {
 }
 
 export default function App() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalProduct, setModalProduct] = useState(null);
+
   useEffect(() => {
     document.body.style.background = `url(${bgBack}) center center / cover no-repeat`;
     return () => {
@@ -981,7 +899,11 @@ export default function App() {
                     <HeroText />
                     <ShopNowButton />
                     <div style={{ marginTop: 48 }}>
-                      <ProductGrid />
+                      <ProductGrid
+                        modalProduct={modalOpen ? modalProduct : null}
+                        onClose={() => { setModalOpen(false); setModalProduct(null); }}
+                        onProductClick={product => { setModalProduct(product); setModalOpen(true); }}
+                      />
                     </div>
                   </>
                 } />

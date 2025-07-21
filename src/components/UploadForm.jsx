@@ -44,7 +44,7 @@ export default function UploadForm() {
           </button>
           <div className="customcase-belowtext" style={{ marginTop: 20, textAlign: 'center', color: '#F3F6FB', fontSize: 17, fontWeight: 400 }}>
             Because your device deserves armor as legendary as its owner.<br />
-            🛒 Craft yours now and become part of the Dracaryx legacy.
+            Craft yours now and become part of the Dracaryx legacy.
           </div>
         </div>
         <div

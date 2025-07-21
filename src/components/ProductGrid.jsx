@@ -9,6 +9,7 @@ import dracaryxNoxveil from '../assets/dracaryx-noxveil.png';
 import dracaryxSolstrix from '../assets/dracaryx-solstrix.png';
 import dracaryxAetherion from '../assets/dracaryx-aetherion.png';
 import dracaryxPyros from '../assets/dracaryx-pyros.png';
+import dragonIcon from '../assets/dragon-icon.svg';
 
 const phoneProducts = [
   {
@@ -16,7 +17,6 @@ const phoneProducts = [
     price: '$1,499',
     image: dracaryxVanta,
     details: {
-      subtitle: '🔥 The Shadowborn Flagship',
       description: 'Dracaryx Vanta is a performance monster clad in black-red armor. Every element draws from the darkness, accepting no compromise. Powered by the world\'s first ShadowCoreX architecture - brutal speed and ultra-low power consumption.',
       specs: [
         { label: 'Display', value: '6.8" WQHD+ AMOLED, 144Hz, HDR10+' },
@@ -37,7 +37,6 @@ const phoneProducts = [
     price: '$899',
     image: dracaryxAzura,
     details: {
-      subtitle: '🔵 The Skytech Pioneer',
       description: 'Blue-tinged elegance and precision. Dracaryx Azura is a future-oriented model that embodies the balance of speed, energy efficiency, and aesthetics. Minimalist yet refined tech in your hand.',
       specs: [
         { label: 'Display', value: '6.6" FHD+ AMOLED, 120Hz, Always-On' },
@@ -58,7 +57,6 @@ const phoneProducts = [
     price: '$1,599',
     image: dracaryxNoxveil,
     details: {
-      subtitle: 'The Phantom Flame of Precision',
       description: 'Dracaryx Noxveil is an elegant, dark technological gem. The dragon shape on the back is not just decoration – it is a symbol of the device\'s power. This phone combines encrypted security, AI-driven features, and ultra-modern design.',
       specs: [
         { label: 'Display', value: '6.9" AMOLED FlexEdge, 144Hz' },
@@ -80,7 +78,6 @@ const tabletProducts = [
     price: '$1,199',
     image: dracaryxIgnis,
     details: {
-      subtitle: '🔥🦾 Born from Flame. Built for Creation.',
       description: 'Dracaryx Ignis is a tech beast dipped in red. Designed for creative work, multitasking, or gaming sessions – the glowing dragon emblem on the back only enhances the experience.',
       specs: [
         { label: 'Display', value: '12.4" 2.8K AMOLED, 144Hz, HDR10+' },
@@ -101,7 +98,6 @@ const tabletProducts = [
     price: '$1,399',
     image: dracaryxAetherion,
     details: {
-      subtitle: '🜂 Enlighten the Arcane. Command the Future.',
       description: 'Dracaryx Aetherion is a high-performance, futuristic tablet designed for creators, tech leaders, and future-oriented users. The legendary purple dragon pattern glows on the sleek grey body, symbolizing creativity and power.',
       specs: [
         { label: 'Display', value: '12.3" AMOLED HDR10+, 144Hz, 4K resolution' },
@@ -124,7 +120,6 @@ const laptopProducts = [
     price: '$3,299',
     image: dracaryxUmbra,
     details: {
-      subtitle: '⚙️ The Techno-Beast from the Shadows',
       description: 'A laptop you do not just look at, but fear. Dracaryx Umbra is a gamer and workstation hybrid, with a blue-glowing dragon on the back. Uncompromising performance - tuned to the max.',
       specs: [
         { label: 'Display', value: '17.3" 4K OLED, 240Hz, G-Sync, HDR1000' },
@@ -145,7 +140,6 @@ const laptopProducts = [
     price: '$2,799',
     image: dracaryxSolstrix,
     details: {
-      subtitle: '⚡ Born from Stars, Forged for Power',
       description: 'Dracaryx Solstrix is a precisely crafted high-tech laptop, the perfect fusion of technological power and aesthetic elegance. The orange dragon pattern on the back almost pulses with energy – a true weapon in the digital arena.',
       specs: [
         { label: 'Display', value: '17.3" QLED, 240Hz, 4K UHD' },
@@ -164,8 +158,6 @@ const laptopProducts = [
     price: '$3,699',
     image: dracaryxPyros,
     details: {
-      subtitle: '🔴 🐉 Forged in Fire. Designed to Dominate.',
-      limited: 'Limited Edition',
       description: 'The Dracaryx Pyros is a high-tech war machine wrapped in molten orange and accented with mystical turquoise hues. Built for creators, power users, and next-gen gamers, its glowing crimson dragon sigil on the back is more than design—it\'s a statement.',
       specs: [
         { label: 'Display', value: '16.5" 4K AMOLED, 240Hz, HDR10+' },
@@ -222,28 +214,6 @@ function ProductModal({ product, onClose }) {
         }} />
         <div style={{ flex: 1, minWidth: 0, width: isMobile ? '100%' : 'auto' }}>
           <h2 style={{ margin: 0, fontSize: isMobile ? 22 : 32, fontWeight: 700, letterSpacing: 1 }}>{product.name}</h2>
-          {product.details?.subtitle && <div style={{ fontStyle: 'italic', color: '#ffb347', marginBottom: 12, fontSize: isMobile ? 15 : 18 }}>{product.details.subtitle}</div>}
-          {product.details?.limited && (
-            <div style={{
-              display: 'inline-block',
-              background: 'linear-gradient(90deg, #181828 70%, #23233a 100%)',
-              color: '#F3F6FB',
-              fontWeight: 800,
-              fontSize: isMobile ? 13 : 16,
-              borderRadius: 14,
-              padding: isMobile ? '4px 12px' : '5px 22px',
-              marginBottom: 14,
-              marginLeft: 0,
-              marginTop: 0,
-              letterSpacing: 2,
-              boxShadow: '0 2px 16px 0 #00BFFF33',
-              border: '2px solid #00BFFF',
-              textShadow: '0 1px 8px #00BFFF44',
-              textTransform: 'uppercase',
-              width: 'fit-content',
-              letterSpacing: '0.15em',
-            }}>{product.details.limited}</div>
-          )}
           {product.details?.description && <div style={{ marginBottom: isMobile ? 12 : 20, fontSize: isMobile ? 14 : 16, lineHeight: 1.6 }}>{product.details.description}</div>}
           {product.details?.specs && (
             <ul style={{ paddingLeft: 18, margin: 0, fontSize: isMobile ? 13 : 15, lineHeight: 1.7 }}>

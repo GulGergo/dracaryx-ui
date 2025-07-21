@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './TierSelector.module.css';
+import dragonSettings from '../assets/dragon-settings.svg';
 
 export default function TierSelector({ className = '', style = {}, initialTier = 'standard', onTierChange }) {
   const [tier, setTier] = useState(initialTier);
@@ -60,7 +61,7 @@ export default function TierSelector({ className = '', style = {}, initialTier =
   return (
     <aside className={`${styles.tierSelector} ${className}`} style={style}>
       <div className={styles.header}>
-        <span role="img" aria-label="settings">⚙️</span> Choose Your Tier
+        <img src={dragonSettings} alt="dragon settings" style={{ height: 80, width: 80, verticalAlign: 'middle', marginRight: 12, display: 'inline-block', filter: 'invert(56%) sepia(98%) saturate(749%) hue-rotate(170deg) brightness(97%) contrast(101%)' }} /> Choose Your Tier
       </div>
       <div className={styles.toggleRow}>
         {tiers.map(t => (

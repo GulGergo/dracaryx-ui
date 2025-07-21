@@ -804,13 +804,13 @@ function ContactUs() {
           Reach out to the Dracaryx support team and we'll respond faster than dragonfire.
         </div>
         <div style={{ fontSize: 17, marginBottom: 2 }}>
-          <span role="img" aria-label="tech">🛠️</span> Need tech help?
+          Need tech help?
         </div>
         <div style={{ fontSize: 17, marginBottom: 2 }}>
-          <span role="img" aria-label="design">🤔</span> Want to design your own case?
+          Want to design your own case?
         </div>
         <div style={{ fontSize: 17, marginBottom: 2 }}>
-          <span role="img" aria-label="order">🛒</span> Having trouble with your order?
+          Having trouble with your order?
         </div>
         <div style={{ fontWeight: 700, marginTop: 10, fontSize: 16 }}>
           Send us a message. We've got your back (and your device).
@@ -828,19 +828,19 @@ function ContactUs() {
       {/* Live chat gomb */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 28 }}>
         <button style={{ background: 'linear-gradient(90deg, #23233a 40%, #181828 100%)', color: '#C6FF00', fontWeight: 800, fontSize: 18, border: '2px solid #C6FF00', borderRadius: 10, padding: '12px 32px', cursor: 'pointer', boxShadow: '0 2px 12px 0 #C6FF0044', transition: 'background 0.2s' }} onClick={() => alert('Live chat coming soon!')}>
-          💬 Live chat
+          Live chat
         </button>
       </div>
       {/* Szerviz cím és nyitvatartás */}
       <div style={{ display: 'flex', flexDirection: 'row', gap: 40, flexWrap: 'wrap', marginTop: 18 }}>
         <div style={{ flex: 1, minWidth: 220 }}>
-          <div style={{ fontWeight: 700, fontSize: 17, marginBottom: 6 }}>📍 Service Center</div>
+          <div style={{ fontWeight: 700, fontSize: 17, marginBottom: 6 }}>Service Center</div>
           <div style={{ fontSize: 16, marginBottom: 2 }}>Dragon Plaza 42, 3rd floor</div>
           <div style={{ fontSize: 16, marginBottom: 2 }}>Budapest, 1099</div>
           <div style={{ fontSize: 16, marginBottom: 2 }}>Hungary</div>
         </div>
         <div style={{ flex: 1, minWidth: 220 }}>
-          <div style={{ fontWeight: 700, fontSize: 17, marginBottom: 6 }}>🕓 Opening hours</div>
+          <div style={{ fontWeight: 700, fontSize: 17, marginBottom: 6 }}>Opening hours</div>
           <div style={{ fontSize: 16, marginBottom: 2 }}>Monday–Friday: 09:00–18:00</div>
           <div style={{ fontSize: 16, marginBottom: 2, color: '#b0b8c6' }}>Saturday–Sunday: Closed</div>
         </div>

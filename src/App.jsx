@@ -10,6 +10,9 @@ import TierSelector from './components/TierSelector';
 import { phoneProducts, tabletProducts, laptopProducts } from './components/ProductGrid';
 import ProductCard from './components/ProductCard';
 import { ProductModal } from './components/ProductGrid';
+import dragonLaptop from './assets/dragon-laptop.svg';
+import dragonTablet from './assets/dragon-tablet.svg';
+import dragonMobile from './assets/dragon-mobile.svg';
 
 function RepairPage() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -31,9 +34,9 @@ function RepairPage() {
   const isMobile = window.innerWidth <= 600;
 
   const products = [
-    { key: 'phone', label: 'Phone', icon: '📱' },
-    { key: 'tablet', label: 'Tablet', icon: '📲' },
-    { key: 'laptop', label: 'Laptop', icon: '💻' },
+    { key: 'phone', label: 'Phone', icon: <img src={dragonMobile} alt="Phone" style={{ height: 64, width: 'auto', maxWidth: '100%', marginBottom: 4, display: 'block' }} /> },
+    { key: 'tablet', label: 'Tablet', icon: <img src={dragonTablet} alt="Tablet" style={{ height: 64, width: 'auto', maxWidth: '100%', marginBottom: 4, display: 'block' }} /> },
+    { key: 'laptop', label: 'Laptop', icon: <img src={dragonLaptop} alt="Laptop" style={{ height: 64, width: 'auto', maxWidth: '100%', marginBottom: 4, display: 'block' }} /> },
   ];
 
   const phoneUpgrades = [
@@ -115,8 +118,7 @@ function RepairPage() {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', fontWeight: 700, fontSize: 32, marginBottom: 10, gap: 12 }}>
-          <span role="img" aria-label="tools">🛠️</span>
-          <span>Dracaryx Repair – Precision for Every Beast</span>
+          Dracaryx Repair – Precision for Every Beast
         </div>
         <div style={{ fontSize: 18, color: '#ccc', marginBottom: 8 }}>
           Even the strongest machines need care.
@@ -167,8 +169,7 @@ function RepairPage() {
         </div>
         <hr style={{ border: 'none', borderTop: '1px solid #444', margin: '32px 0 32px 0' }} />
         <div style={{ display: 'flex', alignItems: 'center', fontWeight: 700, fontSize: 24, marginBottom: 10, gap: 10 }}>
-          <span role="img" aria-label="pricing">🖊️</span>
-          <span>Device Repair Pricing</span>
+          Device Repair Pricing
         </div>
         <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: 18 }}>
           <thead>
@@ -179,15 +180,15 @@ function RepairPage() {
           </thead>
           <tbody>
             <tr style={{ borderTop: '1px solid #333' }}>
-              <td style={{ padding: '8px 0', color: '#4dd0e1', fontSize: 17 }}><span role="img" aria-label="phone">📱</span> Phone</td>
+              <td style={{ padding: '8px 0', color: '#4dd0e1', fontSize: 17 }}><img src={dragonMobile} alt="Phone" style={{ height: 24, width: 'auto', verticalAlign: 'middle', marginRight: 8, display: 'inline-block' }} /> Phone</td>
               <td style={{ padding: '8px 0', fontWeight: 700, color: '#fff', fontSize: 17 }}>$49.99</td>
             </tr>
             <tr style={{ borderTop: '1px solid #333' }}>
-              <td style={{ padding: '8px 0', color: '#4dd0e1', fontSize: 17 }}><span role="img" aria-label="tablet">📲</span> Tablet</td>
+              <td style={{ padding: '8px 0', color: '#4dd0e1', fontSize: 17 }}><img src={dragonTablet} alt="Tablet" style={{ height: 24, width: 'auto', verticalAlign: 'middle', marginRight: 8, display: 'inline-block' }} /> Tablet</td>
               <td style={{ padding: '8px 0', fontWeight: 700, color: '#fff', fontSize: 17 }}>$69.99</td>
             </tr>
             <tr style={{ borderTop: '1px solid #333' }}>
-              <td style={{ padding: '8px 0', color: '#b0bec5', fontSize: 17 }}><span role="img" aria-label="laptop">💻</span> Laptop</td>
+              <td style={{ padding: '8px 0', color: '#b0bec5', fontSize: 17 }}><img src={dragonLaptop} alt="Laptop" style={{ height: 24, width: 'auto', verticalAlign: 'middle', marginRight: 8, display: 'inline-block' }} /> Laptop</td>
               <td style={{ padding: '8px 0', fontWeight: 700, color: '#fff', fontSize: 17 }}>$89.99</td>
             </tr>
           </tbody>
@@ -199,7 +200,7 @@ function RepairPage() {
         {/* Repair Process Info Section */}
         <div style={{ margin: '32px 0 0 0', background: 'none' }}>
           <div style={{ display: 'flex', alignItems: 'center', fontWeight: 700, fontSize: 22, marginBottom: 10, gap: 8 }}>
-            <span role="img" aria-label="clock">⏰</span> Repair Process
+            Repair Process
           </div>
           <ol style={{ margin: 0, paddingLeft: 24, fontSize: 17, color: '#fff', fontWeight: 500, marginBottom: 24 }}>
             <li style={{ marginBottom: 6 }}>Select your device and issue</li>
@@ -970,7 +971,7 @@ export default function App() {
                         alignSelf: 'flex-start',
                       }}>
                         <div style={{ display: 'flex', alignItems: 'center', fontWeight: 700, fontSize: 22, marginBottom: 10, gap: 8 }}>
-                          <span role="img" aria-label="info">🖼️</span> How It Works:
+                          How It Works:
                         </div>
                         <ol style={{ margin: 0, paddingLeft: 32, fontSize: 17, color: '#fff', fontWeight: 500 }}>
                           <li style={{ marginBottom: 6 }}><b>Select your device model</b></li>
@@ -1001,6 +1002,7 @@ export default function App() {
           alignItems: 'center',
           justifyContent: 'center',
           boxShadow: '0 -2px 24px 0 #00BFFF33',
+          flexDirection: 'column',
         }}>
           <span className="caption" style={{
             color: '#C6FF00',
@@ -1008,6 +1010,17 @@ export default function App() {
             fontWeight: 600,
             fontSize: 16,
           }}>© 2024. All rights reserved.</span>
+          <span style={{
+            color: '#b0bec5',
+            fontSize: 12,
+            marginTop: 4,
+            textAlign: 'center',
+            maxWidth: 700,
+            lineHeight: 1.5,
+            display: 'block',
+          }}>
+            Disclaimer: This website is a personal project created solely for learning, experimentation, and entertainment purposes. All content is fictional and not intended for commercial use.
+          </span>
         </footer>
       </div>
     </Router>

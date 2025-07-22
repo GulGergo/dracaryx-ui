@@ -32,6 +32,8 @@ function RepairPage() {
   const [userInfo, setUserInfo] = useState({ name: '', phone: '', email: '', address: '', city: '', zip: '' });
   const [warrantyModalOpen, setWarrantyModalOpen] = useState(false);
   const isMobile = window.innerWidth <= 600;
+  // Új state: repairOrUpgradeModalOpen
+  const [repairOrUpgradeModalOpen, setRepairOrUpgradeModalOpen] = useState(false);
 
   const products = [
     { key: 'phone', label: 'Phone', icon: <img src={dragonMobile} alt="Phone" style={{ height: 64, width: 'auto', maxWidth: '100%', marginBottom: 4, display: 'block' }} /> },
@@ -267,7 +269,7 @@ function RepairPage() {
                     margin: isMobile ? '0 auto' : 0,
                   }}
                 >
-                  <ProductCard {...product} onClick={() => { setModalProduct(product); setModalOpen(true); }} showPrice={false} />
+                  <ProductCard {...product} onClick={() => { setModalProduct(product); setRepairOrUpgradeModalOpen(true); }} showPrice={false} />
                 </div>
               ))}
             </div>
@@ -781,6 +783,98 @@ function RepairPage() {
                 opacity: 0.7,
               }}
               onClick={() => setWarrantyModalOpen(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+      {/* Repair/Upgrade választó modal */}
+      {repairOrUpgradeModalOpen && modalProduct && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          background: 'rgba(0,0,0,0.7)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000,
+        }} onClick={() => { setRepairOrUpgradeModalOpen(false); setModalProduct(null); }}>
+          <div style={{
+            background: 'linear-gradient(135deg, #181828 80%, #23233a 100%)',
+            borderRadius: 24,
+            padding: window.innerWidth <= 600 ? 16 : '40px 48px',
+            minWidth: 300,
+            maxWidth: 400,
+            color: 'white',
+            boxShadow: '0 12px 48px 0 rgba(0,0,0,0.55)',
+            position: 'relative',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 18,
+            maxHeight: window.innerWidth <= 600 ? '98vh' : undefined,
+            overflowY: window.innerWidth <= 600 ? 'auto' : undefined,
+          }} onClick={e => e.stopPropagation()}>
+            <div style={{ fontWeight: 700, fontSize: 22, marginBottom: 8, textAlign: 'center' }}>
+              What would you like to do?
+            </div>
+            <button
+              style={{
+                background: 'linear-gradient(90deg, #00BFFF 60%, #C6FF00 100%)',
+                color: '#222',
+                fontWeight: 700,
+                fontSize: 18,
+                border: 'none',
+                borderRadius: 10,
+                padding: '14px 32px',
+                cursor: 'pointer',
+                boxShadow: '0 2px 12px 0 #00BFFF33',
+                marginBottom: 8,
+                width: '100%',
+              }}
+              onClick={() => {
+                setRepairOrUpgradeModalOpen(false);
+                setWarrantyModalOpen(true);
+              }}
+            >
+              Repair only
+            </button>
+            <button
+              style={{
+                background: 'linear-gradient(90deg, #23233a 60%, #181828 100%)',
+                color: '#C6FF00',
+                fontWeight: 700,
+                fontSize: 18,
+                border: '2px solid #C6FF00',
+                borderRadius: 10,
+                padding: '14px 32px',
+                cursor: 'pointer',
+                boxShadow: '0 2px 12px 0 #C6FF0033',
+                width: '100%',
+              }}
+              onClick={() => {
+                setRepairOrUpgradeModalOpen(false);
+                setUpgradeModalOpen(true);
+              }}
+            >
+              Repair + Upgrade
+            </button>
+            <button
+              style={{
+                background: 'none',
+                color: '#fff',
+                border: 'none',
+                fontSize: 16,
+                marginTop: 8,
+                cursor: 'pointer',
+                textDecoration: 'underline',
+                opacity: 0.7,
+              }}
+              onClick={() => { setRepairOrUpgradeModalOpen(false); setModalProduct(null); }}
             >
               Cancel
             </button>
